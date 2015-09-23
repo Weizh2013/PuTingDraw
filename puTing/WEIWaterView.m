@@ -54,8 +54,9 @@
         _inX4 = 3*width/4 - STARTOFFSET2/2;  // 3*width/4 ~ width/2  -
         _inX5 = width/4 + STARTOFFSET2/2;    // width/4 ~ wdith/2    +
         _inX6 = 0 + STARTOFFSET2;            // 0 ~ wdith/2          +
-        
-        _timer = [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(didTimeOut) userInfo:self repeats:YES];
+        if (_timer == nil) {
+            _timer = [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(didTimeOut) userInfo:self repeats:YES];
+        }
     }
     return self;
 }
@@ -149,64 +150,15 @@
     }else if (_inX5 > width/4 + STARTOFFSET/2 && addBase2 < 0){
         _inX5 += addBase2/2 - SPEEDOFFSET;
     }
-
-    
-    
-    
-//    static CGFloat addx1 = -1.0;
-//    if (_inX1 > width/2 - 20) {
-//        addx1 = -1.0;
-//    }else if (_inX1 < width/4 +20){
-//        addx1 = 1.0;
-//    }
-//    static CGFloat addx2 = 1.0;
-//    if (_inX2 > 3*width/4 - 20) {
-//        addx2 = -1.0;
-//    }else if (_inX2 < width/2 +20){
-//        addx2 = 1.0;
-//    }
-//    static CGFloat addx3 = 1.0;
-//    if (_inX3 > width - 20) {
-//        addx3 = -1.0;
-//    }else if (_inX3 < width/2 +20){
-//        addx3 = 1.0;
-//    }
-//    static CGFloat addx4 = -1.0;
-//    if (_inX4 > 3*width/4 - 20) {
-//        addx4 = -1.0;
-//    }else if (_inX4 < width/2 +20){
-//        addx4 = 1.0;
-//    }
-//    static CGFloat addx5 = 1.0;
-//    if (_inX5 > width/2 - 20) {
-//        addx5 = -1.0;
-//    }else if (_inX5 < width/4 +20){
-//        addx5 = 1.0;
-//    }
-//    static CGFloat addx6 = 1.0;
-//    if (_inX6 > width/2 - 20) {
-//        addx6 = -1.0;
-//    }else if (_inX6 < 0 +20){
-//        addx6 = 1.0;
-//    }
-    
-//    _inX1 += addx1;
-//    _inX2 += addx2;
-//    _inX3 += addx3;
-//    _inX4 += addx4;
-//    _inX5 += addx5;
-//    _inX6 += addx6;
     
     [self setNeedsDisplay];
-    
-    
-//    _inX1 = width/2 - STARTOFFSET/2;    // width/2 ~ width/4    -
-//    _inX2 = width/2 + STARTOFFSET/2;    // width/2 ~ 3*width/4  +
-//    _inX3 = width/2 + STARTOFFSET;      // width/2 ~ width      +
-//    _inX4 = 3*width/4 - STARTOFFSET/2;  // 3*width/4 ~ width/2  -
-//    _inX5 = width/4 + STARTOFFSET/2;    // width/4 ~ wdith/2    +
-//    _inX6 = 0 + STARTOFFSET;            // 0 ~ wdith/2          +
 
+}
+
+- (void)dealloc{
+    NSLog(@"water view dealloc");
+    [_timer invalidate];
+    _timer = nil;
 }
 
 @end
